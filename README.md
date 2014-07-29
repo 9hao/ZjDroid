@@ -8,12 +8,19 @@ I. ZjDroid Introduction
 
 ZjDroid is a reverse tool based on Xposed Framewrok. It can do following tasks：
 1. Dump dex from memory;
+
 2. Reverse app protect(packer) by key pointer to BakSmali in Dalvik;
+
 3. Monitor dangerous API;
+
 4. Dump specific memory;
+
 5. Obtain DEX info of APK;
+
 6. Obtain class info of DEX file;
+
 7. Dump Dalvik java heap info;
+
 8. Run Lua scripts in target process.
 
 
