@@ -34,7 +34,6 @@ am broadcast -a com.zjdroid.invoke --ei target pid --es cmd '{"action":"dump_cla
 
 3. Decompile DEX by memory pointer, save it to file:
 am broadcast -a com.zjdroid.invoke --ei target pid --es cmd '{"action":"backsmali","dexpath":"*****"}'
-
 This command can unpack most of popular packers(app protect)
 Exception:
 For ApkProtect has anti-modify, following actions are needed for unpack ApkProtect:
@@ -59,7 +58,6 @@ Use case：
  a. Used to call decrypt method dynamically to do decryption.
  b. Used to trigger specific code logic.
 am broadcast -a com.zjdroid.invoke --ei target pid --es cmd '{"action":"invoke","filepath":"****"}'
-
 luajava usage：
 http://www.keplerproject.org/luajava/
 
