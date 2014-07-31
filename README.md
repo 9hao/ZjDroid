@@ -43,7 +43,7 @@ For ApkProtect has anti-modify, following actions are needed for unpack ApkProte
  d. reboot the phone.
 
 4. Dump specific DEX in memory and save it to file (in odex format which can be decompiled on PC)
-am broadcast -a com.zjdroid.invoke --ei target pid --es cmd '{"action":"dump_dex","dexpath":"*****"}'
+am broadcast -a com.zjdroid.invoke --ei target pid --es cmd '{"action":"dump_dexfile","dexpath":"*****"}'
 
 
 5. Dump specific memory to file
