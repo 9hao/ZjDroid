@@ -201,14 +201,9 @@ public final class LuaJavaAPI
     synchronized (L)
     {
       Class clazz;
-      try
-      {
-        clazz = Class.forName(className);
-      }
-      catch (ClassNotFoundException e)
-      {
-        throw new LuaException(e);
-      }
+      clazz = LuaClassLoader.forName(className);
+      if(clazz == null)
+        throw new LuaException(className+" not find");
       Object ret = getObjInstance(L, clazz);
 
       L.pushJavaObject(ret);
@@ -256,14 +251,9 @@ public final class LuaJavaAPI
     synchronized (L)
     {
       Class clazz;
-      try
-      {
-        clazz = Class.forName(className);
-      }
-      catch (ClassNotFoundException e)
-      {
-        throw new LuaException(e);
-      }
+      clazz = LuaClassLoader.forName(className);
+      if(clazz == null)
+        throw new LuaException(className+" not find");
 
       try
       {

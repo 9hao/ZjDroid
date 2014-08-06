@@ -33,6 +33,8 @@ public class LuaScriptInvoker{
 			logfunction.register("log");
 			JavaFunction tostringfunction = new ToStringFunctionCallBack(luaState);
 			tostringfunction.register("tostring");
+			luaState.pushJavaObject(ModuleContext.getInstance().getAppContext().getApplicationContext());
+			luaState.setGlobal("context");
 		} catch (LuaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

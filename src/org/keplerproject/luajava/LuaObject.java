@@ -533,7 +533,7 @@ public class LuaObject
 			StringTokenizer st = new StringTokenizer(implem, ",");
 			Class[] interfaces = new Class[st.countTokens()];
 			for (int i = 0; st.hasMoreTokens(); i++)
-				interfaces[i] = Class.forName(st.nextToken());
+				interfaces[i] = LuaClassLoader.forName(st.nextToken());
 
 			InvocationHandler handler = new LuaInvocationHandler(this);
 

@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import com.android.reverse.hook.HookHelperFacktory;
 import com.android.reverse.hook.HookHelperInterface;
@@ -36,6 +37,45 @@ public class DexFileInfoCollecter{
 		if (collecter == null)
 			collecter = new DexFileInfoCollecter();
 		return collecter;
+	}
+	
+	
+	public Class loadClass(String className){
+		
+		Class result = null;
+		try {
+			Logger.log("load the class through class.forname");
+			result = Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+		}
+		if(result == null){
+			Logger.log("load the class through pathClassLoader");
+			try {
+				result = pathClassLoader.loadClass(className);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+			}
+		}
+		if(result == null){
+			Logger.log("load the class through DexFile");
+			Iterator<DexFileInfo> dexinfos = dynLoadedDexInfo.values().iterator();
+			DexFileInfo info = null;
+			while(dexinfos.hasNext()){
+				info = dexinfos.next();
+				int cookie = info.getmCookie();
+				Object obj = RefInvoke.invokeStaticMethod("dalvik.system.DexFile", "defineClass", new Class[]{String.class, ClassLoader.class,int.class,List.class},
+						new Object[]{className,info.getDefineClassLoader(),info.getmCookie(),null});
+				if(obj != null){
+					result = (Class) obj;
+					break;
+				}
+			}
+		}
+		if(result != null)
+			Logger.log("find the class "+className);
+		return result;
+		
 	}
 
 	public void start() throws Throwable {
