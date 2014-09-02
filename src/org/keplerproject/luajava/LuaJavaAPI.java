@@ -71,7 +71,7 @@ public final class LuaJavaAPI
         clazz = obj.getClass();
       }
 
-      Method[] methods = clazz.getMethods();
+      Method[] methods = clazz.getDeclaredMethods();
       Method method = null;
 
       // gets method and arguments
@@ -117,10 +117,10 @@ public final class LuaJavaAPI
       Object ret;
       try
       {
-        if(Modifier.isPublic(method.getModifiers()))
-        {
+        //if(Modifier.isPublic(method.getModifiers()))
+       // {
           method.setAccessible(true);
-        }
+        //}
         
         if (obj instanceof Class)
         {
@@ -370,7 +370,8 @@ public final class LuaJavaAPI
 
       try
       {
-        field = objClass.getField(fieldName);
+        field = objClass.getDeclaredField(fieldName);
+        field.setAccessible(true);
       }
       catch (Exception e)
       {
@@ -428,7 +429,7 @@ public final class LuaJavaAPI
         clazz = obj.getClass();
       }
 
-      Method[] methods = clazz.getMethods();
+      Method[] methods = clazz.getDeclaredMethods();
 
       for (int i = 0; i < methods.length; i++)
       {
@@ -581,5 +582,4 @@ public final class LuaJavaAPI
 
     return obj;
   }
-
 }

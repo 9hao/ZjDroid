@@ -22,7 +22,9 @@ public class ContextImplHook extends ApiMonitorHook{
 			public void descParam(HookParam param) {
 				// TODO Auto-generated method stub				
 				Logger.log_behavior("Register BroatcastReceiver");
-				Logger.log_behavior("The BroatcastReceiver ClassName = "+param.args[0].getClass().toString());
+				if(param.args[0] != null){
+				   Logger.log_behavior("The BroatcastReceiver ClassName = "+param.args[0].getClass().toString());
+				}
 				if(param.args[1] != null){
 				   String intentstr = descIntentFilter((IntentFilter) param.args[1]);
 				   Logger.log_behavior("Intent Action = ["+intentstr+"]");

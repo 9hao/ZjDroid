@@ -35,6 +35,8 @@ public class LuaScriptInvoker{
 			tostringfunction.register("tostring");
 			luaState.pushJavaObject(ModuleContext.getInstance().getAppContext().getApplicationContext());
 			luaState.setGlobal("context");
+			luaState.pushJavaObject(ZjDroidLuaJavaAPI.getInstance());
+			luaState.setGlobal("zjdroid");
 		} catch (LuaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,7 +111,4 @@ public class LuaScriptInvoker{
 		}
 		
 	}
-	
-	
-
 }
